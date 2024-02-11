@@ -1,76 +1,109 @@
 # https://openclassrooms.com/fr/courses/7150616-apprenez-la-programmation-orientee-objet-avec-python/7195400-ecrivez-une-classe-python 
-class Toolbox:
-    """
-    Classe : boite à ouils
-        Variables :
-        -- tools : les outils présents dans la caisse à outil
 
-        Méthodes :
-        -- add_tool : ajoute un outil dans la boite à outils
-        -- remove_tool : enlève un outil de la boite à outils   
-    """
-    def __init__ (self):
-        """Initialise la caisse à outils."""
+class ToolBox:
+    """Boite à outils."""
+
+    def __init__(self):
+        """Initialise les outils."""
         self.tools = []
-        
-    
-    def add_tool (self, tool) :
-        """Ajoute un outil."""
-        pass
-    
-    
-    def remove_tool (self, tool) :
-        """Enlève un outil."""
-        pass
-    
-class Screwdriver:
-    """
-     Classe : Tournevis
-        Variables :
-        -- size : taille en mm de l'embout du tournevis
 
-        Méthodes :
-        -- tighten (screw) : serre la vis 'screw'
-        -- loosen (screw) : desserre la vis 'screw'
-    """
-    def __init__ (self, size):
-        """Initialise la taille du tournevis."""
+    def add_tool(self, tool):
+        """Ajoute un outil."""
+        self.tools.append(tool)
+
+    def remove_tool(self, tool):
+        """Enleve un outil."""
+        index = self.tools.index(tool)
+        del self.tools[index]
+
+ 
+
+class Screwdriver:
+    """Tournevis."""
+
+    def __init__(self, size=3):
+        """Initialise la taille."""
         self.size = size
     
-    def tighten (self, screw) :
-        """Serre la vis."""
-        pass
+    def tighten(self, screw):
+        """Serrer une vis."""
+        screw.tighten()
     
-    def loosen (self, screw) :
-        """Desserre la vis."""
-        pass
+    def loosen(self, screw):
+        """Desserre une vis."""
+        screw.loosen()
     
-    
- class Hammers:
-    """
-    Classe : Marteaux
-        Variables :
-        -- color : la couleur du marteau
+    def __repr__(self):
+        """Représentation de l'objet."""
+        return f"Tournevis de taille {self.size}"
 
-        Méthodes :
-        -- hammer_in(nail) : plante un clou
-        -- remove(nail) : enlève un clou
-    """
-    def __init__ (self, color = "Red"):
-        """Initialise la couleur du marteau (en rouge par défaut)."""
+
+class Hammer:
+    """Marteau."""
+
+    def __init__(self, color="red"):
+        """Initialise la couleur."""
         self.color = color
- 
-    def paint (self, color) :
-        """Plante le clou."""
-        pass
     
-    def hammer_in (self, nail) :
-        """Plante le clou."""
-        pass
+    def paint(self, color):
+        """Paint le marteau."""
+        self.color = color
+    
+    def hammer_in(self, nail):
+        """Enfonce un clou."""
+        nail.nail_in()
+    
+    def remove(self, nail):
+        """Enleve un clou."""
+        nail.remove()
+    
+    def __repr__(self):
+        """Représentation de l'objet."""
+        return f"Marteau de couleur {self.color}"
 
-    def remove (self, nail) :
-        """Enlève le clou."""
-        pass
+
+class Screw:
+    """Vis."""
+     
+    MAX_TIGHTNESS = 5
     
- 
- 
+    def __init__(self):
+        """Initialise son degré de serrage."""
+        self.tightness = 0
+    
+    def loosen(self):
+        """Déserre le vis."""
+        if self.tightness > 0:
+        self.tightness -= 1
+    
+    def tighten(self):
+        """Serre le vis."""
+        if self.tightness < self.MAX_TIGHTNESS:
+        self.tightness += 1
+    
+    def __str__(self):
+        """Retourne une forme lisible de l'objet."""
+        return "Vis avec un serrage de {}".format(self.tightness)
+
+
+class Nail:
+    """Clou."""
+    
+    def __init__(self):
+        """Initialise son statut "dans le mur"."""
+        self.in_wall = False
+    
+    def nail_in(self):
+        """Enfonce le clou dans un mur."""
+        if not self.in_wall:
+        self.in_wall = True
+    
+    def remove(self):
+        """Enlève le clou du mur."""
+        if self.in_wall:
+        self.in_wall = False
+    
+    def __str__(self):
+        """Retourne une forme lisible de l'objet."""
+        wall_state = "dans le mur" if self.in_wall else "hors du mur"
+        return f"Clou {wall_state}."
