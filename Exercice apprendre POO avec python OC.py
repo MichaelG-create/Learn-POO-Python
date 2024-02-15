@@ -107,3 +107,33 @@ class Nail:
         """Retourne une forme lisible de l'objet."""
         wall_state = "dans le mur" if self.in_wall else "hors du mur"
         return f"Clou {wall_state}."
+
+
+
+# initialise une boîte à outils, un marteau et un tournevis 
+
+toolbox = Toolbox()
+hammer = Hammer()
+screwdriver = Screwdriver()
+
+# met les outils dans la boîte à outils 
+toolbox.add_tool(hammer)
+toolbox.add_tool(screwdriver)
+
+# initialise une vis et l'affiche 
+screw = Screw()
+print(screw)
+
+# serre une vis avec le tournevis puis l'affiche 
+screwdriver.tighten(screw)
+print(screw)
+
+# initialise un clou et l'affiche 
+screw = Screw()
+print(screw)
+
+# serre une vis avec le tournevis puis l'affiche 
+screwdriver.tighten(screw)
+print(screw)
+
+
